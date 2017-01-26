@@ -18,7 +18,7 @@ public class Player {
         }
         else{
             int point;
-            point = go.getBoard()[y-1][x-1];
+            point = go.getBoard()[y][x];
             if(point == 0)
                 go.setBoard(stone, x, y);
             else {

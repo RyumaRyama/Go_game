@@ -1,5 +1,4 @@
 package jp.ac.uryukyu.ie.e165730;
-import java.io.*;
 
 public class Main {
     public static void main(String[] args){
