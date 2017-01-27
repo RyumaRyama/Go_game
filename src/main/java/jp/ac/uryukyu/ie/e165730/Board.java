@@ -55,6 +55,7 @@ public class Board {
                             System.out.print("○ ");
                             break;
                     }
+                    //System.out.print(board[i][j]+" ");
                 }
             }
             System.out.println();

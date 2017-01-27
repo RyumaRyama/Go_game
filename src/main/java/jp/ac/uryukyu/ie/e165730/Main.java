@@ -4,7 +4,6 @@ public class Main {
     public static void main(String[] args){
         //碁盤オブジェクト
         Board go = new Board();
-
         //0で黒石，1で白石のプレイヤー
         Player black = new Player(1);
         Player white = new Player(2);
@@ -20,5 +19,6 @@ public class Main {
             if(black.getPass() && white.getPass())
                 break;
         }
+
     }
 }

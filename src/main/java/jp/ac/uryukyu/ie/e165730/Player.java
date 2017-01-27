@@ -1,9 +1,13 @@
 package jp.ac.uryukyu.ie.e165730;
 import java.io.*;
+import java.util.*;
 
 public class Player {
-    private int stone;
-    private boolean pass, noPut;
+    private int stone, count = 0;   //石の色，石の集まりができるたびにカウント
+    private boolean pass, noPut;    //パス，石を置いたかの判定
+    private List<Group> groupList = new ArrayList<Group>();
+    private Map<ArrayList, Integer> groupNum = new HashMap<ArrayList, Integer>();
+
     public Player(int stone){
         this.stone = stone;
         pass = false;
@@ -31,8 +35,8 @@ public class Player {
 
     //石を置く座標の入力
     public Board thinking(Board go){
-        System.out.println("Player "+stone);
         int x, y;
+        System.out.println("Player "+stone);
         String buf;
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
@@ -71,7 +75,23 @@ public class Player {
             go = put(go, x, y);
         }while(noPut);
 
+        makeGroup(x, y);
+        //groupList.get(count-1).printGroup(count-1);
+        //System.out.println(groupNum.get(groupList.get(count-1).getGroup(count-1)));
         return go;
+    }
+
+    //石を一つの集まりとして扱う
+    public void makeGroup(int x, int y){
+        //集まりとしてのインスタンス生成
+        Group group = new Group(stone);
+        group.addStone(x, y);
+        groupList.add(group);
+
+        //どの集まりに所属しているか
+        //エラー( ´▽｀)
+        //groupNum.put(group.getGroup(count), count);
+        //count += 1;
     }
 
     //passのsetter,getter
