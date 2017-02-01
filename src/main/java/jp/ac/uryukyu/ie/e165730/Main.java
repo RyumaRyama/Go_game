@@ -12,13 +12,14 @@ public class Main {
         System.out.println("x,yに0を入力するとパス");
         System.out.println();
         while(true){
-            go = black.thinking(go);
+            black.thinking(go);
+            black.takeStone(go, white);
             if(black.getPass() && white.getPass())
                 break;
-            go = white.thinking(go);
+            white.thinking(go);
+            white.takeStone(go, black);
             if(black.getPass() && white.getPass())
                 break;
         }
-
     }
 }
