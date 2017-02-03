@@ -21,5 +21,10 @@ public class Main {
             if(black.getPass() && white.getPass())
                 break;
         }
+        System.out.println("\n\n\n\n\n\n\n\n\n\n");
+        //ゲーム終了画面
+        go.printBoard();
+        System.out.printf("Player1：%d石\n", black.getTake());
+        System.out.printf("Player2：%d石\n", white.getTake());
     }
 }

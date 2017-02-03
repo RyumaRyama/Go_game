@@ -4,12 +4,10 @@ import java.util.*;
 public class Group {
     //まとまっている石の座標とその色
     private List<List> group = new ArrayList<List>();
-    private int stone;
     private int groupCount;
     private int breath;
 
-    public Group(int stone){
-        this.stone = stone;
+    public Group(){
         groupCount = -1;
         breath = 0;
     }
