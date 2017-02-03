@@ -98,36 +98,36 @@ public class Board {
     }
 
     //呼吸点を数える
-    public int breathCount(Group group, Player enemy, int x, int y){
+    public void breathCount(Group group, int stone, int x, int y){
         searchStone(x, y);
-        int count = 0;
-
         //それぞれの点を確認
-        pointBreath(group, x, y-1, enemy);
-        pointBreath(group, x, y+1, enemy);
-        pointBreath(group, x-1, y, enemy);
-        pointBreath(group, x+1, y, enemy);
+        pointBreath(group, x, y-1, stone);
+        pointBreath(group, x, y+1, stone);
+        pointBreath(group, x-1, y, stone);
+        pointBreath(group, x+1, y, stone);
+    }
 
+    //座標の呼吸点をカウント
+    public void pointBreath(Group group, int x, int y, int stone){
+        if(search[y][x] == 0){
+            if(board[y][x] == EMPTY){
+                group.breathPlus();
+            }
+            else if(board[y][x] == stone){
+                breathCount(group, stone, x, y);
+            }
+        }
+    }
 
+    //石を消すか判定
+    public int deleteJudge(Group group, Player enemy, int x, int y){
+        int count = 0;
+        breathCount(group, enemy.getStone(), x, y);
         if(group.getBreath() == 0){
             count += deleteStone(group, enemy);
         }
         return count;
     }
-
-
-    //座標の呼吸点をカウント
-    public void pointBreath(Group group, int x, int y, Player enemy){
-        if(search[y][x] == 0){
-            if(board[y][x] == EMPTY){
-                group.breathPlus();
-            }
-            else if(board[y][x] == enemy.getStone()){
-                breathCount(group, enemy, x, y);
-            }
-        }
-    }
-
 
     //石を消す
     public int deleteStone(Group group, Player enemy){

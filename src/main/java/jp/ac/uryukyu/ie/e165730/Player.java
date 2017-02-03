@@ -5,6 +5,7 @@ import java.lang.*;
 
 public class Player {
     private int take, stone, count;   //石の色，石の集まりができるたびにカウント
+    private int lastX, lastY;
     private boolean pass, noPut;    //パス，石を置いたかの判定
     private List<Group> groupList = new ArrayList<Group>();
     private Map<List, Integer> groupNum = new HashMap<List, Integer>();
@@ -30,8 +31,11 @@ public class Player {
         else{
             int point;
             point = go.getBoard()[y][x];
-            if(point == 0)
+            //自殺手や石がある場合はもう一度
+            if(point == 0) {
                 go.setBoard(stone, x, y);
+                lookStone(go, x, y);
+            }
             else {
                 System.out.println("すでに石があります\n");
                 noPut = true;
@@ -80,9 +84,8 @@ public class Player {
             System.out.println("\n\n\n\n\n\n\n\n\n\n");
             put(go, x, y);
         }while(noPut);
-        if(!pass){
-            lookStone(go, x, y);
-        }
+        lastX = x;
+        lastY = y;
     }
 
     //石を集まりを作成
@@ -156,27 +159,35 @@ public class Player {
     public boolean getPass(){
         return pass;
     }
+
+    //その他getter
     public int getStone(){
         return stone;
     }
     public int getTake(){
         return take;
     }
+    public int getLastX(){
+        return lastX;
+    }
+    public int getLastY(){
+        return lastY;
+    }
 
     //石をとる
-    public void takeStone(Board go, Player enemy){
+    public void takeStone(Board go, Player enemy) {
         go.searchClean();
         int i, j;
-        for(i=0; i<11; i++){
-            for(j=0; j<11; j++){
+        for (i = 0; i < 11; i++) {
+            for (j = 0; j < 11; j++) {
                 //的の石を見つけたらそこから呼吸点を計算
                 if (go.getSearch()[i][j] == 0) {
-                    if(go.getBoard()[i][j] == enemy.getStone()){
+                    if (go.getBoard()[i][j] == enemy.getStone()) {
                         List<Integer> list = new ArrayList<Integer>();
                         list.add(j);
                         list.add(i);
                         enemy.groupList.get(enemy.groupNum.get(list)).setBreath(0);
-                        take += go.breathCount(enemy.groupList.get(enemy.groupNum.get(list)), enemy, j, i);
+                        take += go.deleteJudge(enemy.groupList.get(enemy.groupNum.get(list)), enemy, j, i);
                     }
                 }
             }

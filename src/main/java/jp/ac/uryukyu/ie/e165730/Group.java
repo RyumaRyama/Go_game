@@ -39,6 +39,8 @@ public class Group {
         System.out.println(group.get(num));
     }
 
+
+    //breathのgetter, setter, plusメソッド
     public void breathPlus(){
         breath += 1;
     }
