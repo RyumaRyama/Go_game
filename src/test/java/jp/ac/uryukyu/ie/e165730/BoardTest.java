@@ -6,6 +6,10 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 public class BoardTest {
+    /*
+    石を5, 5に置き，，その石をdeleteStoneで削除できているかのテスト
+    消えて入れば空白の配列testGoと等しくなる
+     */
     @Test
     public void deleteStone() throws Exception {
         int stone, testX, testY;
@@ -25,5 +29,6 @@ public class BoardTest {
         int groupNum = groupNums.get(list);
         Group group = groups.get(groupNum);
         go.deleteStone(group, black);
+        assertArrayEquals(testGo, go.getBoard());
     }
 }
