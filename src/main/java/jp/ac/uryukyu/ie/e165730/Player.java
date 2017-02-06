@@ -128,7 +128,7 @@ public class Player {
                 所属しているグループがあるならそこにもう片方のグループを追加していく
                 一つにまとめて，片方は使わず放置
             */
-            else{
+            else if(groupNum.get(coordinate) != groupNum.get(move)){
                 int size, i, temp_x, temp_y, num;
                 size = groupList.get(groupNum.get(move)).getGroupList().size();
                 for(i=0; i<size; i++){
