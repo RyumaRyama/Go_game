@@ -5,7 +5,6 @@ import java.lang.*;
 
 public class Player {
     private int take, stone, count;   //石の色，石の集まりができるたびにカウント
-    private int lastX, lastY;
     private boolean pass, noPut;    //パス，石を置いたかの判定
     private List<Group> groupList = new ArrayList<Group>();
     private Map<List, Integer> groupNum = new HashMap<List, Integer>();
@@ -14,11 +13,6 @@ public class Player {
         this.stone = stone;
         pass = false;
         count = 0;
-    }
-
-    //groupNumのgetter
-    public Map getGroupNum(){
-        return groupNum;
     }
 
     //石を置く
@@ -84,8 +78,6 @@ public class Player {
             System.out.println("\n\n\n\n\n\n\n\n\n\n");
             put(go, x, y);
         }while(noPut);
-        lastX = x;
-        lastY = y;
     }
 
     //石を集まりを作成
@@ -160,6 +152,11 @@ public class Player {
         return pass;
     }
 
+    //groupNumのgetter
+    public Map getGroupNum(){
+        return groupNum;
+    }
+
     //その他getter
     public int getStone(){
         return stone;
@@ -167,12 +164,10 @@ public class Player {
     public int getTake(){
         return take;
     }
-    public int getLastX(){
-        return lastX;
+    public List getGroupList(){
+        return groupList;
     }
-    public int getLastY(){
-        return lastY;
-    }
+
 
     //石をとる
     public void takeStone(Board go, Player enemy) {
@@ -193,4 +188,5 @@ public class Player {
             }
         }
     }
+
 }
